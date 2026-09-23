@@ -112,6 +112,12 @@ class TestMainWindow:
             openHomepageRequested = _DummySignal()
 
         class _StubPanel(QWidget):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                # main_window reads command_panel.progress.value()
+                self.progress = Mock()
+                self.progress.value.return_value = 0
+
             def retranslate_ui(self):
                 pass
 
@@ -128,14 +134,23 @@ class TestMainWindow:
             def setProgressText(self, *args, **kwargs):
                 return None
 
+            def set_progress(self, *args, **kwargs):
+                return None
+
             def setProgress(self, *args, **kwargs):
+                return None
+
+            def setConvertingState(self, *args, **kwargs):
                 return None
 
             def setState(self, *args, **kwargs):
                 return None
 
-            def progress(self):
-                return Mock()
+            def appendTaskLog(self, *args, **kwargs):
+                return None
+
+            def appendMultiTaskSummary(self, *args, **kwargs):
+                return None
 
             restoreRequested = _DummySignal()
             importRequested = _DummySignal()

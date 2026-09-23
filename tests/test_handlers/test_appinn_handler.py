@@ -165,7 +165,10 @@ class TestAppinnHandler:
             mock_client.return_value.__enter__.return_value.get.return_value = mock_response
 
             result = fetch_appinn_article(
-                mock_session, "https://www.appinn.com/test/", logger=mock_logger
+                mock_session,
+                "https://www.appinn.com/test/",
+                logger=mock_logger,
+                min_content_length=0,
             )
 
             # Verify logger methods were called
