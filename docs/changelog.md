@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.10] - 2026-09-23
+
+- test(tests): fix appinn handler and main window test stubs
+- test: remove flaky, machine-dependent performance tests
+- fix(windows): stop child console processes from flashing windows
+- feat(windows): replace VBScript launcher with MarkdownAll.pyw
+
 ## [1.0.9] - 2025-12-01
 
 - feat: add manual handler override for URL conversion
