@@ -46,6 +46,25 @@ version = "{ver}"
 
 
 @pytest.mark.unit
+def test_get_version_passes_no_window_creationflags():
+    """``uv version`` is a console app and must not open a console window."""
+    from markdownall.utils.win_process import NO_WINDOW
+
+    completed = types.SimpleNamespace(stdout="1.0.9\n")
+    path = Path(__file__).parent.parent.parent / "src" / "markdownall" / "version.py"
+    with mock.patch("subprocess.run", return_value=completed) as fake_run:
+        spec = importlib.util.spec_from_file_location(
+            "markdownall.version_tested_no_window", str(path)
+        )
+        mod = importlib.util.module_from_spec(spec)
+        assert spec.loader is not None
+        spec.loader.exec_module(mod)
+        mod.get_version()
+
+    assert fake_run.call_args.kwargs["creationflags"] == NO_WINDOW
+
+
+@pytest.mark.unit
 def test_get_version_uses_uv_success():
     version = import_version_with_uv()
     # Module-level computed during import
