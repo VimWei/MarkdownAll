@@ -52,7 +52,11 @@ Option 1: (Windows/Linux/macOS) Command line:
 ```bash
 uv run markdownall
 ```
-Option 2: (Windows only) Double-click launcher file `MarkdownAll.vbs`.
+Option 2: (Windows only) Double-click launcher file `MarkdownAll.pyw` — it starts
+without a console window. The start-up splash screen still appears while the app
+loads. First run (before `.venv` exists) opens a visible window so the uv setup
+is visible; runtime output and errors are written to
+`%LOCALAPPDATA%\MarkdownAll\launcher.log`.
 
 ### Basic Usage
 
